@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <style>
+        #messages { height: 200px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <div id="messages"></div>
+    <input type="text" id="messageInput">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+
+        const socket = new WebSocket('ws://172.20.10.2:3000');
+
+        socket.onmessage = function(event) {
+            messages.innerHTML += `<div>${event.data}</div>`;
+        };
+
+        function sendMessage() {
+            const message = messageInput.value;
+            socket.send(message);
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>
