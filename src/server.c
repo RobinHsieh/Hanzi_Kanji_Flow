@@ -55,7 +55,7 @@ int main() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
 
-    // 綁定 socket 到 localhost 的 8080 端口
+    // 綁定 socket 到 IP
     if (bind(master_socket_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
         perror("bind failed");
         exit(EXIT_FAILURE);
